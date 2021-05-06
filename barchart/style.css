@@ -1,0 +1,13 @@
+#title {
+  height: 100%;
+  padding: 15px;
+  margin: 0;
+}
+#title,
+.chart {
+  background-color: #ccc;
+}
+
+svg {
+  background-color: #eee;
+}
