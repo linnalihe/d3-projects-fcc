@@ -1,4 +1,4 @@
-# d3-projects-fcc
+# D3 Projects (FCC)
 
 ## D3 Bar Chart
 
