@@ -1,17 +1,17 @@
 const url =
   "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json";
 
-const width = 800,
-  height = 400;
-const container = d3.select(".container").style("text-align", "center");
+d3.json(url).then(({ data }) => {
+  const width = 800,
+    height = 400;
+  const container = d3.select(".container").style("text-align", "center");
 
-const chart = d3
-  .select(".chart")
-  .append("svg")
-  .attr("width", width + 100)
-  .attr("height", height + 100);
+  const chart = d3
+    .select(".chart")
+    .append("svg")
+    .attr("width", width + 100)
+    .attr("height", height + 100);
 
-d3.json(url).then(({ error, data }) => {
   chart
     .append("text")
     .attr("transform", "rotate(-90)")
@@ -61,20 +61,19 @@ d3.json(url).then(({ error, data }) => {
     .call(yAxis)
     .attr("transform", "translate(60, 50)");
 
-  const rectBars = d3
-    .select("svg")
+  d3.select("svg")
     .selectAll("rect")
     .data(dObj)
     .enter()
     .append("rect")
     .attr("class", "bar")
     .attr("id", (d, i) => "bar" + i)
-    .attr("data-date", (d, i) => d["date"])
-    .attr("data-gdp", (d, i) => d["gdp"])
-    .attr("x", (d, i) => xScale(parseDate(d["date"])))
-    .attr("y", (d, i) => yScale(d["gdp"]))
+    .attr("data-date", (d) => d["date"])
+    .attr("data-gdp", (d) => d["gdp"])
+    .attr("x", (d) => xScale(parseDate(d["date"])))
+    .attr("y", (d) => yScale(d["gdp"]))
     .attr("width", barWidth)
-    .attr("height", (d, i) => height - yScale(d["gdp"]))
+    .attr("height", (d) => height - yScale(d["gdp"]))
     .style("fill", "#eab676")
     .attr("transform", "translate(60, 50)")
     .on("mouseover", (e, d) => {
@@ -91,7 +90,7 @@ d3.json(url).then(({ error, data }) => {
         .style("top", "375px")
         .style("border", "2px solid black");
     })
-    .on("mouseout", (e, d) => {
+    .on("mouseout", (e) => {
       d3.select(e.path[0]).style("fill", "#eab676");
       d3.select("#tooltip").text("").style("display", "none");
     });
